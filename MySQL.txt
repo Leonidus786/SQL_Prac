@@ -169,15 +169,55 @@ DROP TABLE, DROP DATABASE, DESCRIBE.
 
 CRUD Operations 
 
+that means when we have created a table:
 create --> means creating the new records.--> INSERT statement
 read -->  once the data is in the table we are reading it --> SELECT statements
 update --> means updating the record --> UPDATE statements
 delete --> means deleting a record --> DELETE statements
 
+ 
+
 
 Creation of table and insert statements.
 
+Now Consider you are a small startup and you ae looking to hire some employees and 
+you want to have an employee table to manage their database.
 
+So You are looking to have a employee table and now you are a Ahmedabad  based startup in India 
+and you your preference is to hire more employees from Ahmedabad that's what you want you prefer 
+to hire employee from Ahmedabad location. That is the one preference that you have for example.
+Now what table structure you can keep I mean there can be a lot of fields in the table but let's keep it simple 
+
+
+we can create a table for example create table okay so basically we will keep the table structure simple and then we will 
+refine it later so when you hire employees. Employee might have a first name, last name, middlename, and apart from that you 
+want to capture the age, salary and you might capture the location. So let's begin with this.
+to start with this is good enough to create table, table name. CREATE TABLE is the keyword that's why it's preferred that
+you keep it in uppercase but it's not that if you put it in lowercase you get error no but recommended that you put in uppercase
+for your reference so that you follow
+
+for firstname what will be the datatype, this is like a string so it will be VARCHAR we can say 255 characters ideally 255 is not 
+required because we know it won't consume 255 characters so we can keep it lt's say 20 characters similarly for middle and lastname
+because all of this is string type, age you know it's numeric so this will be integer salary is also numeric location is again varchar and will say 20 characters
+good enough so let me take this and go to my terminal you know how to reach to this we are using goorm ide and now I'll say 
+
+SHOW DATABAES;
+
+I want to give a fresh start because there will be some tables which are already there
+so I'll drop the database  and recreate it.
+
+DROP DATABASE itplc;
+
+
+CREATE DATABASE itplc;
+
+SHOW DATABASES; show I should be able to see itplc as one of the database I'll say use itplc so that I go inside this
+
+NOW let me create the table that we have in the definition we have written by the way just for your understanding this command 
+is called as a ddl DATA DEFINITION LANGUAGE because we are doing something with definition rather than data this is called ddl and we see 
+I'll talk about ddl and dml later do not worry but since it came I just brought that.
+
+ 
 CREATE TABLE employee (
 firstname VARCHAR(20),
 middlename VARCHAR(20),
@@ -188,22 +228,77 @@ location VARCHAR(20)
 );
 ------- THIS is called DDL- data definition language.
 
-DESC employee;
+
+We have created this table now. with all of these columns looks perfect let me clear the screen and say 
+
+SHOW TABLES;
+
+I should be able to see employee table now let me see the structure of it
+
+
+I am able to see all column names and data types and null yes default value I'll talk more about it what does it mean 
+so there are other things too which we will talk in a while  now we have created a table which is empty right now
+how do you see the data inside a table using select command 
 
 
 SELECT * FROM employee;
+
+There are no records inside it that's why we see empty set 
+
+okay now let me insert some records how do I do that 
+
+let's say insert into employee means insert into table name now if you follow right practice make it caps 
+
+
+
+INSERT INTO employee VALUES('Satish', 'kumar', 'sharma', 
+28, 10000, 'Bangalore');
+
+name take satish and location is from Bengaluru. and run but let me tell you one good practice that it is not must but
+it is recommended that you give the list of column names here so for example 
+insert into employee and then you give this (firstname, middlename ) 
+
 
 
 INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
  VALUES('Kapil', 'kumar', 'sharma', 
 28, 10000, 'Bangalore');
 
+this is how we should be proceeding now let me try running this and see if it works
+done I am able to insert a record now let me go back and create one more insert command mmand 
+and I won't put this list here and let me make slight difference in the value let's say instead of 
+
+
+INSERT INTO employee VALUES('Satish', 'kumar', 'sharma', 
+28, 10000, 'Bangalore');
+
+having understood this let's try to do a select on this table 
+and my command i Want to run is 
+
 SELECT * FROM employee;
 
 
-INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
- VALUES('Kapil', 'kumar', 'sharma', 
+ and I can see both the records are there  just have a look now what if I donot want to insert  data for all
+columns let's say someone do not have a middle name now make a copy of insert command and then what i would say here
+I do not want to give the middle name because lot of people do not have a middlename I do not have for example first name lastname age salary
+location 
+
+INSERT INTO employee(firstname, lastname, age, salary, location)
+ VALUES('rajesh', 'sharma', 
+32, 30000, 'Bangalore');
+
+It is inserted. We have not given the value of middle name now if you would have done the same without bringing this list
+into play for example what 
+
+
+
+
+INSERT INTO employee VALUES('rajesh', 'sharma', 
 28, 10000, 'Bangalore');
+
+this would definitely give an error because when you are not mentioning the list of column names then you should be giving  all 
+of the values for all columns in your table
+
 
 
 INSERT INTO employee VALUES('Satish', 'kumar', 'sharma', 
