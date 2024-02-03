@@ -292,68 +292,146 @@ into play for example what
 
 
 
-
 INSERT INTO employee VALUES('rajesh', 'sharma', 
 28, 10000, 'Bangalore');
 
-this would definitely give an error because when you are not mentioning the list of column names then you should be giving  all 
-of the values for all columns in your table
+this would definitely give an error because when you are not mentioning the list of column names then you
+ should be giving  all 
+of the values for all columns in your table you cannot leave any of them
+so we understood that this value or this insert doesn't work and that's why it's not inserted 
 
+let me do a select * again
+
+You might be wondering what is null is it 0 or is it no value null is basically undefined you cannot sahy that it is 0 or you
+cannot say that there is no value like that you say that we do not know. We cannot treat it like a 0 or something 
+
+basically it's like unknown I would say the value of it is unknown so this is how this works. 
+
+just have a look at above statements what I've written 
+
+
+Now what if let's say for any reason you want to have some single quote inside name rightly name would not have that's not 
+the right example but let's say you are having some column where there is a requirement that you want to pull a single quote as a 
+value for example 
+
+
+
+INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
+ VALUES('Kapil's', 'kumar', 'sharma', 
+28, 10000, 'Bangalore');
+ 
+you can see that somehow the structure is all  
+messed up 
+because it's not closing the single quotes properly then how we can tackle this scenario 
+
+okay so what you should do is there are basically two ways instead of single quotes if you give this double quotes like this
+will work because single quote you can replace with double quotes it's not an issue so this double quote which is starting at 
+the beginning is getting ended here and that's why this single quote becomes part of value and this should not give any issues
+let me try 
+
+INSERT INTO employee(firstname, lastname, age, salary, location)
+ VALUES("Kapil's", 'sharma', 28, 10000, 'Bangalore');
+
+
+I HOPE THIS IS clear
+
+I would show one more way to do the same what you can do is let's say you want to use single quote only for example
+
+
+
+INSERT INTO employee(firstname, lastname, age, salary, location)
+ VALUES('Kapil\'s', 'sharma', 28, 10000, 'Bangalore');
+
+you can give a backslash. I would say when you are giving backslach it will understand that next character I have to consider.
+Basically we say it as an escape character so that this will be treated as a value now so let me show 
+this is working same way we did previously I HOPE THIS  is clear.
+
+
+
+Let's see how do we insert multiple values in one go for example
+ 
+
+INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
+ VALUES('Jayesh', 'kumar', 'sharma', 42, 70000, 'Bangalore'),
+('Sunil', 'kumar', 'sharma', 29, 60000, 'Ahmedabad'),
+('Mahesh', 'kumar', 'sharma', 25, 40000, 'Bhavnagar'),
+('Suresh', 'kumar', 'sharma', 33, 48000, 'Calcutta'),
+('Jignesh', 'kumar', 'sharma', 35, 50000, 'Siwan'),
+('Rakesh', 'kumar', 'sharma', 32, 45000, 'Delhi');
+
+In this case I have shown how I inserted two records in one go you can do 10 records 20 records so this is like bulk insert 
+I hope this is clear 
+So we have understood how to write normal insert and we how to write a multiple insert  how do we enter the value of single quote
+same way we can enter value of double quote also if double quote is also coming as a value then we can do it
+
+
+
+INSERT INTO employee(firstname, lastname, age, salary, location)
+ VALUES('Kapil\"s', 'sharma', 28, 10000, 'Bangalore');
+
+
+
+
+
+
+and you remember the first name, middlename, and lastname we say 20 characters 
+what if we are trying to give more than 20 ideally it won't be more than 20 but let's say for some reason
+it is more than 20 let's say 
+
+
+INSERT INTO employee(firstname,  lastname, age, salary, location)
+ VALUES('adhhgadhjgsfasdfghdsgfjsdgfkjsdjk', 'sharma', 
+28, 38000, 'Bangalore');
+
+error why is that it shows why because it could hold 20 characters as per our definition that we have given 
+but now we are trying to enter something more that's why it's not taking it and same will be the case even 
+
+
+and now let's try runningnit 
 
 
 INSERT INTO employee VALUES('Satish', 'kumar', 'sharma', 
 28, 10000, 'Bangalore');  ---> Not recommended
 
 
-INSERT INTO employee (firstname, lastname, age, salary, location)
-VALUES ('rajesh"s', 'sharma', 28, 10000, 'Bangalore');
-
-
-INSERT INTO employee(firstname,  lastname, age, salary, location)
- VALUES('rajesh\n's', 'sharma', 
-28, 10000, 'Bangalore');
-
-
-
-INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
- VALUES('Kapil', 'kumar', 'sharma', 
-28, 10000, 'Bangalore'),
-('Sunil', 'kumar', 'sharma', 
-28, 10000, 'Bangalore'),
-('Mahesh', 'kumar', 'sharma', 
-28, 10000, 'Bangalore'),
-('Suresh', 'kumar', 'sharma', 
-28, 10000, 'Bangalore'),
-('Jignesh', 'kumar', 'sharma', 
-28, 10000, 'Bangalore'),
-('Rakesh', 'kumar', 'sharma', 
-28, 10000, 'Bangalore');
-
+What if you have datatype mismatch 
 
 
 INSERT INTO employee(firstname,  lastname, age, salary, location)
  VALUES('rajesh', 'sharma', 'twenty', 10000, 'Bangalore');
 
+OKay so I hope we are good and you see that how strict is the database that it won't allow you 
+to enter wrong things that's why the integrity and all is quite well maintained in a database.
 
 
-INSERT INTO employee(firstname,  lastname, age, salary, location)
- VALUES('adhhgadhjgsfasdfghdsgfjsdgfkjsdjk', 'sharma', 
-28, 10000, 'Bangalore');
+let's talk about null --- what is null -- Nu
 
+NULL --> Means Something which is Unknown --> 
+For example middle name not everyone will have that's why it can be null
+but can be first name be null no.
 
-
-NULL --> Means Something Unknown --> 
+In our case I mean we can still enter  no value for firstname and
+it will take as null which is wrong What I am trying to say for example 
 
 INSERT INTO employee(lastname, age, salary, location)
- VALUES('sharma', 28, 10000, 'Bangalore');
+ VALUES('sharma', 21, 10000, 'Bangalore');
 
+if I do this insert first name I am removing and then just doing this insert 
+Technically this will work but is is correct we have to understand it 
 
-So let's structure the table so no one could enter null value for firstname.
+SELECT * FROM employee;
+
+We can see first name is coming as null in what actual scenarios will the first name be null
+right none of the cases so we should not allow null value  for such things where we should allow I mean 
+it's not that we give a freedom that anything can be entered as null that's wrong right.
+
+So let me structure this table well so that no one can enter null value for first name.
+Let's do that 
 
 
 DROP TABLE employee;
 
-
+now I want to recreate it so will take previous definition and tweak it slightly 
 
 CREATE TABLE employee (
 firstname VARCHAR(20) NOT NULL,
@@ -364,12 +442,51 @@ salary INT NOT NULL,
 location VARCHAR(20)
 );    -- > Better Approach than the previous one
 
--- > Putting the right constraints into the play.
+
+first name not null that means null values are not allowed for this by default middle name is nullable so we do not have to 
+mention anything
+ofcourse age should be entered without any second thought I mean it can't be null salary should also not null location definitely 
+it has to be not null except middle name all the fields are compulsory
+
+
+we have created a better definition than the one by
+
+-- > Putting the right constraints into the play. so that no one can enter null values for things where we should not be 
+entering them  now let's see the structure of this table 
 
 DESC employee;
 
+We can see that in first name is null allowed no  
 
--- > DEFAULT values
+
+that means atleast this is correct 
+just have a look at this 
+
+if we try running previous insert statement it won't allow us to do that
+
+
+INSERT INTO employee(lastname, age, salary, location)
+ VALUES('sharma', 21, 10000, 'Bangalore');
+
+don't worry about what's it's saying but why this error we have got is because it cannot be null.
+
+I hoe this is clear
+
+
+
+Let's talk about Default values;
+
+Now consider this thing that this location.
+As we know we intend to hire mostly people from bangalore location that was the first preference we have mentioned
+at the very starting if I do
+I mean whatever mostly you will be entering will be people from bangalore location so why do we have to always mention bangalore
+if we do not mention and it takes bangalore by default won't that be great because 95% of the population you are hiring from bangalore
+then why do you have to explicitly mention you say that if I do not mention consider it as bangalore by default otherwise I'll
+mention if it is something else makes sense right so let's try to get that model.
+
+
+DROP TABLE employee;
+and I would create it with new definition which is again a better definition than the previous one 
 
 CREATE TABLE employee (
 firstname VARCHAR(20) NOT NULL,
@@ -377,5 +494,116 @@ middlename VARCHAR(20),
 lastname VARCHAR(20) NOT NULL,
 age INT NOT NULL,
 salary INT NOT NULL,
-location VARCHAR(20)
+location VARCHAR(20) DEFAULT 'Bengaluru'
 );
+
+this is what I am trying to do just have a look now what I would do I will create this table definition and I will show you describe.
+
+DESC employee;
+
+you can see by default the value is bangalore here that means if you do not give anything it will be bangalore.
+I hope this is clear.
+
+Now let me try inserting some records in this table I'll pick some records from earlier and will try
+
+
+INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
+ VALUES('Jayesh', 'kumar', 'sharma', 42, 70000, 'Bangalore'),
+('Sunil', 'kumar', 'sharma', 29, 60000, 'Ahmedabad'),
+('Mahesh', 'kumar', 'sharma', 25, 40000, 'Bhavnagar'),
+('Suresh', 'kumar', 'sharma', 33, 48000, 'Calcutta'),
+('Jignesh', 'kumar', 'sharma', 35, 50000, 'Siwan'),
+('Rakesh', 'kumar', 'sharma', 32, 45000, 'Delhi');
+
+
+
+INSERT INTO employee(firstname, lastname, age, salary)
+ VALUES('Jayesh', 'sharma', 42, 70000),
+('Sunil', 'sharma', 29, 60000);
+
+now in this case what do you expect?
+what will be the middle name -----NULL
+
+and What should be location it should be bengaluru let's see
+
+by default the value is bangalore as we said out of 100 people whom we are hiring 95 are from bangalore then why to explicitly
+enter by default system will consider it as bangalore but my chances are rarest affair case if someone is hired from hyderabad
+chennai we can mention how let's see.
+
+
+INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
+VALUES('Mahesh', 'kumar', 'sharma', 25, 40000, 'Bhavnagar'),
+('Suresh', 'kumar', 'sharma', 33, 48000, 'Calcutta'),
+('Jignesh', 'kumar', 'sharma', 35, 50000, 'Siwan'),
+('Rakesh', 'kumar', 'sharma', 32, 45000, 'Delhi');
+
+I hope this should make sense
+
+so this is how default values work even for age you can do I mean if it is logically feasible
+for you so this is how you can give any number of default values for any column for each column it will be one 
+default value but you can give it for multiple columns.
+
+
+Let me just again describe the table 
+DESC employee;
+
+you can see this location field or column has a default value and is it nullable yes
+that means when we are not giving any value it's bangalore what we can do in this in this case we can
+manually set the value as null.
+this permits us because it is nullable for example
+
+INSERT INTO employee(firstname, middlename, lastname, age, salary, location)
+VALUES('Mahesh', 'kumar', 'sharma', 25, 40000, NULL);
+
+you can see here 
+if we would have not given anything it would have not given anything it would have taken bangalore 
+otherwise we could specify and null is also allowed. if you want to restrict this null then you have to make it not null
+so let me quickly drop 
+
+DROP TABLE employee;
+
+and recreate it very very quick
+
+
+CREATE TABLE employee (
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+);
+
+means null won't be even allowed manually then
+and now if i try to insert same thing as earlier it won't work for sure
+
+so that is where you can combine not null and default 
+if I do not give anything it would have taken as bangalore if I remove this 
+
+
+INSERT INTO employee(firstname, lastname, age, salary)
+VALUES('Mahesh', 'sharma', 25, 40000);
+
+
+now it works 
+
+
+till now 
+
+CRUD operations
+
+SIMPLE inserts
+
+multiple inserts
+
+datatype mismatch
+
+NULL and NOT NULL 
+
+DEFAULT VALUES
+
+NOT NULL AND DEFAULT
+
+
+-------------------------------
+---------------------------------------
