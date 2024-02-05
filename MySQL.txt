@@ -607,3 +607,268 @@ NOT NULL AND DEFAULT
 
 -------------------------------
 ---------------------------------------
+
+
+Primary Key
+
+Auto Increment Keys
+
+Unique Key
+
+Primary Key vs Unique Key
+
+
+
+Let's say whatever the table we have here there can be two employees with the name let's say Rajesh Joshi --
+two employees with the same name how do you uniquely indentify both that is where we have a concept of primary key 
+that means when we define a primary key we can uniquely identify each and every record in a table what I mean to say
+
+
+INSERT INTO employee(firstname, lastname, age, salary)
+VALUES('Mahesh', 'sharma', 25, 40000);
+
+
+PRIMARY KEY === This helps us to uniquely identify each record in the table
+
+
+CREATE TABLE employee (
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+);
+
+USE PRIMARY KEY ----> i.e. identifying each record uniquely.
+
+CREATE TABLE employee (
+id int,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+);
+
+
+
+INSERT INTO employee(id, firstname, lastname, age, salary)
+VALUES(1, 'Mahesh', 'sharma', 25, 40000);
+
+--twice 
+
+What if I insert one more record with the same thing ? 
+
+it worked and even when I do a SELECT staement you can see this id is 1 by default it is not a primary key or something
+we have to make it so that whenever we try to create one more record with that id it gives an error that is what I want to show 
+you 
+
+SELECT * FROM employee;
+
+
+DROP TABLE employee;
+
+
+
+CREATE TABLE employee (
+id INT PRIMARY KEY,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+);
+
+If I do this then definitely multiple employees cannot have a repeated id
+
+Let me show you ---
+
+DESC employee;
+
+
+--You can see this id is a primary key okay and location is a default thing where primary value is 'bangalore'
+
+
+INSERT INTO employee(id, firstname, lastname, age, salary)
+VALUES(1, 'Mahesh', 'sharma', 25, 40000);
+
+it gives me a error
+
+A PRIMARY key says that I won't allow any NULL and I won't allow any repeated values
+
+
+let me try entering some null values just to see if it works;
+
+
+INSERT INTO employee(id, firstname, lastname, age, salary)
+VALUES(NULL, 'Mahesh', 'sharma', 25, 40000);
+
+why because it is a primary key 
+
+What is the good candidate for the primary key something based on which you want to uniquely identified someone 
+for example a customer id in a customer table, employee id and employees table, student roll number in a class things like that
+where you know it can't be duplicated.
+
+One more way with which we could have defined a primary key is =====
+if we don't wana use PRIMARY KEY their(earlier near id) 
+
+there is one more way we could have done something 
+
+CREATE TABLE employee (
+id INT,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+PRIMARY KEY(id)
+);
+
+a slight syntax change ---just for letting you know 
+
+
+and now sometimes you can have a primary key on a combination of two columns then in that case let's say if it is for example
+
+CREATE TABLE employee (
+id INT,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bengaluru'
+PRIMARY KEY(id,name)
+);
+
+--it is like a composite primary key which is on two columns.
+
+sometimes based on two columns you want to have a composite primary key that means a combination of these two cannot 
+be duplicated or should 
+We will be seeing that more in our practical demonestrations later when we talk about some quality examples once we have 
+done the basics and all 
+
+Id of the previous employee and then we have to enter the next one  for example you have 10 employees right now then you know this 
+id value will be 10 and you have to now enter 11 but how do you remember it has to be 11 it gets tricky to identify that
+is why we should go for a auto increment that means you don't have to worry we do not give this value what if this value can 
+increment again and again one month whenever we are inserting.
+
+DROP TABLE employee;
+
+
+let's change this slightly  --
+
+CREATE TABLE employee (
+id INT AUTO_INCREMENT,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bangalore',
+PRIMARY KEY(id)
+);
+
+by which what I am saying i donot want to manually give this value always please start with 1 and then keep on incrementing
+
+that taht's what we want now let me just
+
+DESC employee;
+
+-- you can see under the extra column we are seeing auto increment for id which is primary key also that means it wont be duplicated
+and its auto increment.
+
+
+ I hope this is clear now let me try entering some values for this of course 
+
+
+INSERT INTO employee(firstname, lastname, age, salary)
+VALUES('Mahesh', 'sharma', 25, 40000);
+
+-- I removed id and i don't have to worry really about it.
+
+-- What do you expect will be the value of id in this case 
+
+i have not manually given it 
+
+let's check
+
+SELECT * FROM employee;
+
+
+INSERT INTO employee(firstname, lastname, age, salary)
+VALUES('kapil', 'sharma', 25, 40000);
+
+-- id in this case 
+
+
+-- it will auto increment you don't have to really worry about it now so i mean auto increment is a good candidate
+for primary key because then ofcourse you know when it incrementing all times it will be unique dinstinct.
+
+
+UNIQUE KEYS====== 
+
+you can have only one primary key and the primary key cannot hold any Null value and ideally we should use primary key when 
+we have to distinctly identified or uniquely identify each record we should use primary key when we have to uniquely 
+identify each record.
+
+Unique key is also cannot hold any duplicates just like primary key but unique key can hold null,
+how many null values it can hold ----- Now based on the databases this might change 
+for example 
+
+in MySQL a unique key can hold any number of null values that means it feels that all nulls are different unknown value 
+right but in some of the other databses it holds only one null.
+
+we cannot give more nulls to that but since we are using mysql you will be able to find that you can give any number of null 
+values to a unique key
+what is the whole purpose of the unique key is to make sure that you do not get repeated values for example email id's you
+don't want to differentiate each user based on email id but you want to make sure if someone has taken an email id 
+other cannot take it.
+
+But the purpose of primary key was to make sure we can uniquely identify a record --- one more important thing you can have 
+unique keys on more than one column that means thre can be three columns where you have different unique keys but in case of a 
+table we can have only one primary key now you might get confuse with the composite column or where two columns together have
+a primary key that's a different thing but still we have one primary key right so we can have only one primary key but multiple 
+unique keys in a table.
+
+for eg employee table  
+employee id can be the primary key
+employee email can be a unique key
+make sense it would make.
+
+I want to create let's say a primay key on these - firstname and lastname that means what I am saying 
+A combination of first name and lastname has to be uniquely identified it might not be a scenario in real world 
+but let's think that this is the scenario----
+
+CREATE TABLE employee (
+firstname VARCHAR(20) NOT NULL,
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+PRIMARY KEY(firstname, lastname)
+);
+
+this is what we can definitely do.
+
+DESC employee;
+
+
+insert into employee values('kapil', 'sharma',28);
+
+
+
+
+
+
+CREATE TABLE employee (
+id INT AUTO_INCREMENT,
+firstname VARCHAR(20) NOT NULL,
+middlename VARCHAR(20),
+lastname VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+salary INT NOT NULL,
+location VARCHAR(20) NOT NULL DEFAULT 'Bangalore',
+PRIMARY KEY(id)
+);
