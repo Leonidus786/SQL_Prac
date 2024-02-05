@@ -856,10 +856,55 @@ DESC employee;
 
 
 insert into employee values('kapil', 'sharma',28);
+--repeat it's concatenating firstname and lastame and that is now the primary key so I hope how a composite primary key works
+
+IF YOU WANT TO GIVE A UNIQUE CONSTRAINT
+what can you do instead of doing like above
+
+put unique key like 
+
+CREATE TABLE employee (
+id int UNIQUE KEY,
+firstname VARCHAR(20),
+lastname VARCHAR(20),
+age INT NOT NULL
+);
+
+-- this is what i am trying to say
+
+insert into employee values(1, 'kapil', 'sharma',28),
+(NULL, 'kapil', 'sharma',28),
+(NULL, 'kapil', 'sharma',28);
+
+
+===Primary, autoincrement, unique, unique vs primay
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employee (
+firstname VARCHAR(20),
+lastname VARCHAR(20),
+age INT NOT NULL,
+UNIQUE KEY(firstname, lastname)
+);
 
 
 CREATE TABLE employee (
