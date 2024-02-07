@@ -921,13 +921,13 @@ it is treated as bangalore.
 
 
 INSERT INTO employee(id, firstname, lastname, age, salary)
-VALUES(1, 'rajesh', 'sharma', 25, 40000);
+VALUES(1, 'rajesh', 'sharma', 28, 10000);
 
 INSERT INTO employee(id, firstname, lastname, age, salary)
-VALUES(2, 'kapil', 'sharma', 25, 40000);
+VALUES(2, 'kapil', 'sharma', 30, 20000);
 
 INSERT INTO employee(id, firstname, lastname, age, salary)
-VALUES(3, 'Manish', 'sharma', 25, 40000);
+VALUES(3, 'Manish', 'sharma', 32, 30000);
 
 
 SELECT * from employee;
@@ -940,13 +940,143 @@ SELECT --->
 
 -- Reading the data.
 
+-- Selecting all the columns
+ 
+SELECT * FROM employee;
+
+
+What if I just want to get first name and last name how to get it--->
+
+-- Selecting specific columns
+
+SELECT firstname,lastname FROM employee;
+
+-- So this is preety straight forward i don't think it would require more explanation you can give the column names whatever you want.
+
+-- if only few rows -- what if I want just only two rows based on some condition based on some filter --
+
+-- Let's say I want people whose age is greater than 29?
+
+-- Select by applying where clause (filter condition)
+
+SELECT * FROM employee WHERE age > 29;
+
+SELECT * FROM employee WHERE firstname = 'manish';
+
+-- But do you see one thing here that in our table we have given manish "M" in capital and now when we are searching for manish 
+where 'm' is small the first letter is small then also it's picking up that means by default it is case insensitive it
+doesn't matter whether you give it in uppercase or lowercase 
+
+
+what if for some reasons you want to make it case sensitive you can have a business use case definitely.
+
+
+SELECT * FROM employee WHERE binary firstname = 'manish'; 
+
+-- error
+
+
+
+SELECT * FROM employee WHERE binary firstname = 'Manish';
+
+
+the above statement will match the exact case and it is case sensitive
+
+-- For example you have to get the firstname and lastname but you want to name it as name and surname like that.
+then how do you do?
+
+SELECT firstname,lastname FROM employee; -- without ALIAS -->AS
+
+SELECT firstname AS name,lastname AS surname FROM employee;
+
+
+if you want to have a alias you have to use the AS keyword.
+
+
+=====how to get all columns
+select all columns using *
+select specific columns we can mention or specify the columnnames
+we can give a where clause to filter the records by default it is case insensitive if we want to make it case sensitive we 
+can use the binary keyword 
+and then we have checked alias so that the column names show differently ----Nothing but read operation in crud
+
+
+
+UPDATE
+=========
+
+SELECT * FROM employee;
+
+You want to update the last name of manish 
+
+UPDATE employee set lastname='sinha' where firstname='manish';
+
+
+
+-- Now consider kapil moved from bangalore to ahmedabad and we want to change the location for Kapil.
+
+update employee set location='ahmedabad' where firstname ='kapil';
+
+
+what if i say 
+
+update employee set location='ahmedabad'; 
+
+i didn't give a where clause in this case 
+
+-- it'll update the entire table it will match all the records in this case it will be able to match the 3 records
+because there is no where clause and it will update two records because one record already has ahmedabad.
 
 
 
 
+--- I want to increase the salary of each person by 5000;
+
+UPDATE employee set salary = salary+5000; 
+
+
+-- you want to match two clauses 
+
+-- in the where clause you give and condition that means you want to match two clauses.
+
+suppose i want to change the location of manish to bangalore I might have multiple records with the name so I want to for the 
+complete name.
+
+UPDATE employee SET location='bangalore' where firstname = 'manish' and lastname = 'sinha';
+
+you can see rows match one change. All what I wanted to say is that we can use this logical and or operators when we want to 
+filter based on multiple conditions I hope this is clear.
+
+
+=== While doing the update you have to be very careful becuause if let's say where clause or you are not filtering it properly
+you might end up doing changes to the records which you do not want so always a good practice is first run a select command
+with the same where clause filter and once you feel that you are able to pull only the necessary record then you put the update 
+command.
+Because you do not want to run into a issue where you end up updating unnecessary records which you don't want.
+
+DELETE
+======
+
+SELECT * FROM employee;
+
+I want to delete id 3 as the person is leaving.
+
+so what we can do 
+
+
+DELETE FROM employee where id=3;
+
+-- when you are doing a delete make sure first you kind of check it with the select statement like it is pulling 
+out the right record for you or not.
+-- Because you do not want to run into a issue where you end up deleting something which you don't want 
 
 
 
+=== What if I say 
+
+delete from employee;
+
+-- I am not giving a where clause what will happen in this case all the records will be deleted.
 
 
 CREATE TABLE employee (
@@ -956,7 +1086,7 @@ middlename VARCHAR(20),
 lastname VARCHAR(20) NOT NULL,
 age INT NOT NULL,
 salary INT NOT NULL,
-location VARCHAR(20) NOT NULL DEFAULT 'Bangalore',
+location VARCHAR(20) NOT NULL DEFAULT 'Bangalore'
 );
 
 
